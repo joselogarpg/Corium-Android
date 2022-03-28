@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "79416392668",
+    "project_id": "corium-joselogarpg",
+    "storage_bucket": "corium-joselogarpg.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:79416392668:android:96726593d2b8860a516d19",
+        "android_client_info": {
+          "package_name": "dev.joselogar.corium"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "79416392668-sncluj6brbmp0d7be9m0cbf4uops0md2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJ_OZbjnzL6MhcXSdynoqh3WO_q8CyyX4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "79416392668-sncluj6brbmp0d7be9m0cbf4uops0md2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

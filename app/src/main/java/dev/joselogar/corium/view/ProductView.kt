@@ -2,6 +2,7 @@ package dev.joselogar.corium.view
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -34,12 +35,12 @@ fun ProductView(product: ProductModel) {
         Column {
             Row {
                 Column {
-                    var color = #b71c1c
+                    var color = Color(183, 28, 28)
 
                     if (product.available == true)
-                        color = #b71c1c
+                        color = Color(27, 94, 32)
                     else
-                        color = #b71c1c
+                        color = Color(183, 28, 28)
 
                     Image(
                         painter = rememberImagePainter(product.image[0]),
@@ -48,7 +49,7 @@ fun ProductView(product: ProductModel) {
                         modifier = Modifier
                             .padding(16.dp)
                             .size(125.dp)
-                            .border(4.dp, Color(0xFF2E2D88), CircleShape)
+                            .border(4.dp, color, CircleShape)
                             .padding(8.dp)
                             .clip(CircleShape)
                     )
