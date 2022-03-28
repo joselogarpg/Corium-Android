@@ -56,7 +56,8 @@ class MainActivity : ComponentActivity() {
             //MainScreen()
             //MessageList(messages = listOf("Hola", ":)", "Adiós", ":("))
 
-            ProductViewModel(products = ProductProvider.products)
+            //ProductViewModel(products = ProductProvider.products)
+            HomeScreen()
         }
     }
 }
@@ -83,7 +84,7 @@ fun DefaultPreview() {
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
-    //ProductViewModel(products = ProductProvider.products)
+    ProductViewModel(products = ProductProvider.products)
 }
 
 @Composable
@@ -120,7 +121,7 @@ fun ScreenStateProductList() {
 
 @Composable
 fun StateProductList() {
-    val products = remember {mutableStateListOf(
+    val products = remember { mutableStateListOf(
         "315H",
         "332D",
         "332J"
@@ -133,7 +134,7 @@ fun StateProductList() {
             Text(text = product)
         }
 
-        Button(onClick = {products.add("396A")}) {
+        Button(onClick = { products.add("396A") }) {
             Text(text = "Añadir")
         }
     }
@@ -211,7 +212,8 @@ fun StateHoistingTextFieldProductList(
 
         TextField(
             value = productModel,
-            onValueChange = onProductModelChanged)
+            onValueChange = onProductModelChanged,
+        )
 
         Button(onClick = onButtonClick) {
             Text(text = "Añadir")
