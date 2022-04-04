@@ -32,6 +32,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dev.joselogar.corium.model.ProductProvider
+import dev.joselogar.corium.ui.theme.CoriumTheme
 import dev.joselogar.corium.view.ProductViewModel
 
 class MainActivity : ComponentActivity() {
@@ -57,7 +58,9 @@ class MainActivity : ComponentActivity() {
             //MessageList(messages = listOf("Hola", ":)", "Adiós", ":("))
 
             //ProductViewModel(products = ProductProvider.products)
-            HomeScreen()
+            CoriumTheme {
+                Navigation()
+            }
         }
     }
 }
@@ -84,7 +87,8 @@ fun DefaultPreview() {
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
-    ProductViewModel(products = ProductProvider.products)
+    //ProductViewModel(products = ProductProvider.products)
+    Navigation()
 }
 
 @Composable

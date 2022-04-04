@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.Home
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -15,38 +14,38 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import dev.joselogar.corium.model.ProductProvider
 import dev.joselogar.corium.ui.theme.Orange200
 import dev.joselogar.corium.ui.theme.Purple200
-import dev.joselogar.corium.view.ProductView
 
 @Composable
-fun HomeScreen(navController: NavController) {
+fun ProductsScreen(navController: NavController) {
     Scaffold(
         topBar = {
             TopAppBar {
                 Icon(
-                    imageVector = Icons.Default.Home,
+                    imageVector = Icons.Default.ArrowBack,
                     contentDescription = "Corium",
+                    modifier = Modifier.clickable {
+                        navController.popBackStack()
+                    }
                 )
 
                 Spacer(modifier = Modifier.width(8.dp))
 
-                Text(text = "Corium")
+                Text(text = "Productos")
             }
         }
     ) {
-        HomeBodyContent(navController)
+        ProductsBodyContent(navController)
     }
 }
 
 @Composable
-fun HomeBodyContent(navController: NavController) {
+fun ProductsBodyContent(navController: NavController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(
-                Brush.verticalGradient(
+            .background(Brush.verticalGradient(
                 listOf(
                     Purple200,
                     Orange200
@@ -55,25 +54,16 @@ fun HomeBodyContent(navController: NavController) {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        ProductView(product = ProductProvider.products.first())
+        Text(text = "Productos")
 
-        Text(text = "Corium")
-
-        Button(onClick = { navController.navigate(route = Screens.ProductsScreen.route) }) {
-            Text(text = "Productos")
+        Button(onClick = { navController.popBackStack() }) {
+            Text(text = "Corium")
         }
     }
-
-    /*Column(
-        modifier = Modifier.padding(30.dp)
-            .clickable { navController.navigate(route = Screens.ProductsScreen.route) }
-    ) {
-        ProductView(product = ProductProvider.products.first())
-    }*/
 }
 
 @Preview(showBackground = true)
 @Composable
-fun HomeDefaultPreview() {
-    HomeBodyContent(navController = rememberNavController())
+fun ProductsDefaultPreview() {
+    ProductsBodyContent(navController = rememberNavController())
 }
