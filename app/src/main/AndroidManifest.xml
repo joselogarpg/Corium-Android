@@ -14,10 +14,16 @@
         android:theme="@style/Theme.Corium"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SignupActivity"
+            android:exported="false" />
+        <activity
             android:name=".HomeActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".ProductsActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

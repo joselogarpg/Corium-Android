@@ -24,14 +24,14 @@ private lateinit var fa: FirebaseAuth
 //fa = Firebase.auth
 
 @Composable
-fun LoginScreen(navController: NavHostController) {
+fun SignupScreen(navController: NavHostController) {
     Scaffold {
-        LoginBodyContent(navController)
+        SignupBodyContent(navController)
     }
 }
 
 @Composable
-fun LoginBodyContent(navController: NavController) {
+fun SignupBodyContent(navController: NavController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -56,7 +56,7 @@ fun LoginBodyContent(navController: NavController) {
 
         Text(
             modifier = Modifier.padding(top = 16.dp),
-            text = "LOG IN",
+            text = "SIGN UP",
             style = MaterialTheme.typography.h3
         )
         Text(
@@ -76,22 +76,14 @@ fun LoginBodyContent(navController: NavController) {
 
                 var password_login by remember { mutableStateOf("") }
                 LoginSignupPasswordOutlinedTextField(password_login)
-
-                Text(
-                    modifier = Modifier
-                        .padding(top = 8.dp)
-                        .align(Alignment.End)
-                        .clickable { /* TODO */ },
-                    text = "Forgot password?",
-                    style = MaterialTheme.typography.subtitle1
-                )
+                LoginSignupPasswordOutlinedTextField(password_login)
 
                 Button(
                     modifier = Modifier.padding(top = 16.dp),
                     colors = ButtonDefaults.buttonColors(MaterialTheme.colors.secondary),
                     onClick = {
                     fa
-                        .signInWithEmailAndPassword(email_login, password_login)
+                        .createUserWithEmailAndPassword(email_login, password_login)
                         .addOnCompleteListener { //task ->
                             if (it.isSuccessful) {
                                 navController.navigate(route = Screens.HomeScreen.route)
@@ -102,7 +94,7 @@ fun LoginBodyContent(navController: NavController) {
                         }
                 }) {
                     Text(
-                        text = "Log In",
+                        text = "Sign Up",
                         style = MaterialTheme.typography.button
                     )
                 }
@@ -112,14 +104,14 @@ fun LoginBodyContent(navController: NavController) {
         Row {
             Text(
                 modifier = Modifier.padding(top = 32.dp, end = 8.dp),
-                text = "Don't have an account?",
+                text = "Have an account?",
                 style = MaterialTheme.typography.subtitle2
             )
             Text(
                 modifier = Modifier
                     .padding(top = 32.dp)
-                    .clickable { navController.navigate(route = Screens.SignupScreen.route) },
-                text = "Sign Up",
+                    .clickable { navController.navigate(route = Screens.LoginScreen.route) },
+                text = "Log In",
                 style = MaterialTheme.typography.subtitle2
             )
         }
@@ -128,6 +120,6 @@ fun LoginBodyContent(navController: NavController) {
 
 @Preview(showBackground = true)
 @Composable
-fun LoginDefaultPreview() {
-    LoginBodyContent(navController = rememberNavController())
+fun SignupDefaultPreview() {
+    SignupBodyContent(navController = rememberNavController())
 }
