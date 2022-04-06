@@ -31,11 +31,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import dev.joselogar.corium.model.ProductProvider
 import dev.joselogar.corium.ui.theme.CoriumTheme
-import dev.joselogar.corium.view.ProductViewModel
 
 class MainActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {

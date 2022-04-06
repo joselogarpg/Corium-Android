@@ -1,18 +1,22 @@
 package dev.joselogar.corium
 
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Email
 import androidx.compose.material.icons.outlined.Visibility
 import androidx.compose.runtime.*
+import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 
 @Composable
 fun LoginSignupEmailOutlinedTextField(email_login: String) {
-    var email = email_login
+    val fm = LocalFocusManager.current
+    var email by remember { mutableStateOf("") }
 
     OutlinedTextField(
         value = email,
@@ -33,14 +37,16 @@ fun LoginSignupEmailOutlinedTextField(email_login: String) {
         ),
         keyboardOptions = KeyboardOptions(
             keyboardType = KeyboardType.Email,
-            imeAction = ImeAction.Done
+            imeAction = ImeAction.Next
         ),
+        keyboardActions = KeyboardActions(onNext = { fm.moveFocus(FocusDirection.Down) }),
         maxLines = 1
     )
 }
 
 @Composable
 fun LoginSignupPasswordOutlinedTextField(password_login: String) {
+    val fm = LocalFocusManager.current
     var password = password_login
 
     OutlinedTextField(
@@ -64,6 +70,7 @@ fun LoginSignupPasswordOutlinedTextField(password_login: String) {
             keyboardType = KeyboardType.Password,
             imeAction = ImeAction.Go
         ),
+        keyboardActions = KeyboardActions(onNext = { fm.clearFocus() }),
         maxLines = 1
     )
 }
