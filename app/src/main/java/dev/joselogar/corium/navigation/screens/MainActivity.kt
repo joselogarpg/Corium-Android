@@ -1,4 +1,4 @@
-package dev.joselogar.corium
+package dev.joselogar.corium.navigation.screens
 
 /* default imports
 import android.os.Bundle
@@ -14,10 +14,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import dev.joselogar.myapplication.ui.theme.MyApplicationTheme
 */
 
-import android.os.Bundle
 import android.util.Log
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -31,8 +28,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import dev.joselogar.corium.ui.theme.CoriumTheme
+import dev.joselogar.corium.MainViewModel
+import dev.joselogar.corium.Navigation
 
+/*
 class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -63,32 +62,7 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
-
-/* default function
-@Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
-}
 */
-
-/* default preview
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    CoriumTheme {
-        Greeting("Android")
-    }
-
-    //MyButton(text = "Android")
-}
-*/
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    //ProductViewModel(products = ProductProvider.products)
-    Navigation()
-}
 
 @Composable
 fun MyText(text: String) {

@@ -4,106 +4,131 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import coil.compose.rememberImagePainter
-import dev.joselogar.corium.model.ProductModel
-import dev.joselogar.corium.model.ProductProvider
-import dev.joselogar.corium.ui.theme.Teal200
+import dev.joselogar.corium.model.ModelProduct
+import dev.joselogar.corium.model.ProviderProduct
+import dev.joselogar.corium.ui.theme.Green500
+import dev.joselogar.corium.ui.theme.Red500
 
 @Composable
-fun ProductView(product: ProductModel) {
+fun ProductView(product: ModelProduct) {
     Card(
-        modifier = Modifier.fillMaxWidth(),
-        /* shadow below the card */
-        shape = RoundedCornerShape(8.dp),
-        backgroundColor = Color.White,
-        border = BorderStroke(2.dp, Teal200),
-        elevation = 8.dp
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(
+                start = 24.dp,
+                top = 32.dp,
+                end = 24.dp
+            ),
+        shape = MaterialTheme.shapes.medium,
+        backgroundColor = MaterialTheme.colors.background,
+        border = BorderStroke(
+            2.dp,
+            MaterialTheme.colors.onBackground
+        ),
+        elevation = 0.dp
     ) {
         Row {
             Column {
-                var color: Color
-
-                if (product.available)
-                    color = Color(27, 94, 32)
-                else
-                    color = Color(183, 28, 28)
+                val color =
+                    if (product.available)
+                        Green500
+                    else
+                        Red500
 
                 Image(
                     painter = rememberImagePainter(product.image[0]),
                     contentDescription = product.model,
-                    contentScale = ContentScale.Crop,
                     modifier = Modifier
-                        .padding(start = 16.dp, top = 16.dp, end = 8.dp)
-                        .size(125.dp)
-                        .border(4.dp, color, CircleShape)
-                        .padding(8.dp)
-                        .clip(CircleShape)
+                        .padding(
+                            start = 16.dp,
+                            top = 16.dp,
+                            end = 8.dp
+                        )
+                        .size(128.dp)
+                        .border(
+                            4.dp,
+                            color,
+                            CircleShape
+                        )
+                        .padding(all = 8.dp)
+                        .clip(CircleShape),
+                    contentScale = ContentScale.Crop
+                )
+
+                Text(
+                    text = product.colorName[0],
+                    modifier = Modifier
+                        .align(Alignment.CenterHorizontally)
+                        .padding(
+                            top = 8.dp,
+                            bottom = 8.dp
+                        ),
+                    style = MaterialTheme.typography.subtitle2
                 )
             }
 
             Column {
                 Text(
+                    text = product.company,
                     modifier = Modifier
                         .align(Alignment.CenterHorizontally)
-                        .padding(top = 16.dp),
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 24.sp,
-                    text = product.company
+                        .padding(
+                            top = 16.dp
+                        ),
+                    style = MaterialTheme.typography.h4
                 )
 
                 Divider(
-                    modifier = Modifier.padding(top = 8.dp),
-                    thickness = 2.dp,
-                    color = Teal200)
+                    modifier = Modifier
+                        .padding(
+                            top = 8.dp,
+                            bottom = 16.dp
+                        ),
+                    thickness = 0.dp
+                )
 
                 Text(
+                    text = product.model,
                     modifier = Modifier
-                        .align(Alignment.CenterHorizontally)
-                        .padding(top = 8.dp),
-                    fontWeight = FontWeight.Normal,
-                    fontSize = 16.sp,
-                    text = product.model
+                        .align(Alignment.CenterHorizontally),
+                    style = MaterialTheme.typography.h6
                 )
-                Text(
-                    modifier = Modifier
-                        .align(Alignment.End)
-                        .padding(top = 8.dp, end = 16.dp, bottom = 8.dp),
-                    fontWeight = FontWeight.Normal,
-                    fontSize = 16.sp,
-                    text = product.year.toString()
-                )
-            }
 
-            Row {
-                for (each in product.color_image) {
-                    IconButton(
-                        modifier = Modifier
-                            .padding(start = 16.dp, top = 8.dp, end = 16.dp, bottom = 8.dp)
-                            .size(25.dp)
-                            .clip(CircleShape),
-                        onClick = { /*TODO*/ }
-                    ) {
-                        Image(
-                            painter = rememberImagePainter(each),
-                            contentDescription = product.model,
-                            contentScale = ContentScale.Crop,
-                            modifier = Modifier
-                                .size(25.dp)
-                                .clip(CircleShape)
-                        )
+                LazyRow {
+                    for (each in product.colorImage) {
+                        item {
+                            IconButton(
+                                onClick = { /* TODO */ },
+                                modifier = Modifier
+                                    .padding(
+                                        top = 16.dp,
+                                        end = 12.dp,
+                                        bottom = 8.dp
+                                    )
+                                    .size(24.dp)
+                                    .clip(CircleShape)
+                            ) {
+                                Image(
+                                    painter = rememberImagePainter(each),
+                                    contentDescription = product.model,
+                                    modifier = Modifier
+                                        .size(24.dp)
+                                        .clip(CircleShape),
+                                    contentScale = ContentScale.Crop
+                                )
+                            }
+                        }
                     }
                 }
             }
@@ -114,8 +139,5 @@ fun ProductView(product: ProductModel) {
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
-    /* Product */
-    ProductView(product = ProductProvider.products.first())
-    /* Products */
-    //ProductViewModel(products = ProductProvider.products)
+    ProductView(ProviderProduct.products.first())
 }
